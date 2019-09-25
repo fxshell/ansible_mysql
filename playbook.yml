@@ -1,1 +1,20 @@
-test
+---
+#requires host mysql-service
+
+- name: Install MySQL
+  hosts: mysql-service
+  tasks:
+    - name: Install MySQL
+      package:
+        name: mysql-server
+        state: present
+    
+  handlers:
+    - name: start mysql
+      service: name=mysql
+               enabled=yes
+               state=started
+    - name: restart mysql
+      service: name=mysql
+               enabled=yes
+               state=restarted
