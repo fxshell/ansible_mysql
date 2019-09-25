@@ -6,7 +6,7 @@
   tasks:
     - name: Install MySQL
       package:
-        name: mysql-server
+        name: mysql
         state: present
     
   handlers:
