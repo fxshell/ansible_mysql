@@ -12,13 +12,4 @@
         sudo yum install mysql-server
         sudo systemctl start mysqld
         sudo systemctl status mysqld
-        
-  handlers:
-    - name: start mysql
-      service: name=mysql
-               enabled=yes
-               state=started
-    - name: restart mysql
-      service: name=mysql
-               enabled=yes
-               state=restarted
+
