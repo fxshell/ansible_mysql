@@ -7,5 +7,5 @@
         manager: auto
 
     - name: Print the rpm package facts
-        debug:
-          var: ansible_facts.packages
+      debug:
+        var: ansible_facts.packages
