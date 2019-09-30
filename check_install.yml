@@ -1,7 +1,9 @@
 ---
 
 - hosts: ansiblehost
-
+  package_facts:
+    manager: "auto"
+    
 - name: "postgresql test result"
   debug: 
     msg: "Postgresql found"
