@@ -1,4 +1,6 @@
 ...
+- hosts: ansiblehost
+
 - name: "postgresql test result"
   debug: 
     msg: "Postgresql found"
