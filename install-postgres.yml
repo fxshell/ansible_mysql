@@ -2,14 +2,8 @@
 -
   hosts: ansiblehost
   tasks:
-    - name: check if postgresql is installed
-      yum: 
-        list: postgresql
-      register: yum_results
-      
-      
-    - name: echo var
-      debug: var=yum_results
-
     - name: install postgresql
+      package: 
+        name: postgresql
+        state: present
       
