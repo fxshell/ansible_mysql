@@ -1,5 +1,4 @@
 ---
-
 - hosts: ansiblehost
   - name: Gather the rpm package facts
     package_facts:
