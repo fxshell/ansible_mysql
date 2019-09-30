@@ -1,0 +1,10 @@
+...
+- name: "postgresql test result"
+  debug: 
+    msg: "Postgresql found"
+  when: "'postgresql' in ansible_facts.packages"
+
+- name: "postgresql test result"
+  debug: 
+    msg: "postgresql NOT found"
+  when: "'postgresql' not in ansible_facts.packages"
