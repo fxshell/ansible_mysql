@@ -1,10 +1,11 @@
 ---
 -
 hosts: ansiblehost
-- name: Gather the rpm package facts
-    package_facts:
-      manager: auto
+tasks:
+  - name: Gather the rpm package facts
+      package_facts: 
+        manager: auto
 
- - name: Print the rpm package facts
-    debug:
-      var: ansible_facts.packages
+  - name: Print the rpm package facts
+      debug:
+        var: ansible_facts.packages
