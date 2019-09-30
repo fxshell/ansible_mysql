@@ -1,4 +1,5 @@
-...
+---
+
 - hosts: ansiblehost
 
 - name: "postgresql test result"
