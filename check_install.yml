@@ -4,7 +4,7 @@
   tasks:
     - name: save result in var
       yum: 
-        list: mysql
+        list: something
       register: yum_results
       
       
