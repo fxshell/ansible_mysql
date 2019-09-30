@@ -4,6 +4,8 @@
   tasks:
     - name: install postgresql
       package: 
-        name: postgresql
         state: present
+        name: 
+        - "postgresql"
+        - "postgresql-server"
       
