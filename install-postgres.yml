@@ -3,12 +3,14 @@
   hosts: ansiblehost
   tasks:
     - name: check postgresql status
-      package_facts:
-        manager: "auto"
+      yum:
+        list: postgresql-server
+        state: installed
+        register: l_postgresstatus
 
     - name: debug
       debug:
-        var: ansible_facts.packages
+        var: l_postgresstatus
 
     - name: install postgresql when not already installed
       package: 
@@ -17,7 +19,7 @@
         - "postgresql"
         - "postgresql-server"
         - "postgresql-contrib"
-      when: postgresql-server not in ansible_facts.packages
+      when: postgresql-server not in l_postgresstatus
 
     - name: setup db
       become: yes
