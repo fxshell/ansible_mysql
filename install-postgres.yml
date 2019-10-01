@@ -4,6 +4,11 @@
   tasks:
     - name: check postgresql status
       package_facts:
+        manager: "auto"
+
+    - name: debug
+      debug:
+        var: ansible_facts.packages
 
     - name: install postgresql when not already installed
       package: 
