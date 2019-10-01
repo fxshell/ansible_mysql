@@ -6,7 +6,7 @@
       yum:
         list: postgresql-server
         state: installed
-        register: l_postgresstatus
+      register: l_postgresstatus
 
     - name: debug
       debug:
