@@ -2,10 +2,21 @@
 -
   hosts: ansiblehost
   tasks:
-    - name: install postgresql
+    - name: check postgresql status
+      package_facts:
+
+    - name: install postgresql when not already installed
       package: 
         state: present
         name: 
         - "postgresql"
         - "postgresql-server"
-      
+        - "postgresql-contrib"
+      when: postgresql-server not in ansible_facts.packages
+
+    - name: setup db
+      become: yes
+      ask-become-pass: yes
+      shell: sudo postgresql-setup initdb
+      register: pgsql_setup_status
+      ignore_error: yes
