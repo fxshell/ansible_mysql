@@ -19,4 +19,4 @@
       ask-become-pass: yes
       shell: sudo postgresql-setup initdb
       register: pgsql_setup_status
-      ignore_error: yes
+      ignore_errors: yes
