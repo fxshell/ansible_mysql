@@ -20,9 +20,11 @@
       become: yes
       shell: sudo postgresql-setup initdb
       register: pgsql_setup_status
-      ignore_errors: yes
 
     - name: debug
       debug:
         var: pgsql_setup_status
 
+    - name: Message
+      debug:
+        msg: "When you recieve an error running the setup it usually means it's been already run!"
