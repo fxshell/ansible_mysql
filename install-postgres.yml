@@ -8,10 +8,6 @@
         state: installed
       register: l_postgresstatus
 
-    - name: debug
-      debug:
-        var: l_postgresstatus
-
     - name: install postgresql when not already installed
       package: 
         state: present
@@ -19,10 +15,14 @@
         - "postgresql"
         - "postgresql-server"
         - "postgresql-contrib"
-      when: postgresql-server not in l_postgresstatus
 
     - name: setup db
       become: yes
       shell: sudo postgresql-setup initdb
       register: pgsql_setup_status
       ignore_errors: yes
+
+    - name: debug
+      debug:
+        var: pgsql_setup_status
+
