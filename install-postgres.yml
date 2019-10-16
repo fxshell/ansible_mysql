@@ -8,7 +8,7 @@
         state: installed
       register: l_postgresstatus
 
-    - name: install postgresql when not already installed
+    - name: install postgresql 
       package: 
         state: present
         name: 
@@ -20,11 +20,43 @@
       become: yes
       shell: sudo postgresql-setup initdb
       register: pgsql_setup_status
+      ignore_errors: yes
 
-    - name: debug
-      debug:
-        var: pgsql_setup_status
+    - name: configure postgres user
+      postgresql_user: 
+        name: nipap
+        password: thispasswortisnotsecure
 
-    - name: Message
-      debug:
-        msg: "When you recieve an error running the setup it usually means it's been already run!"
+    - name: configure postgres db
+      postgresql_db: 
+        name: nipap
+        owner: nipap
+
+    - name: install postgres extension
+      become: yes
+      shell: CREATE EXTENSION ip4r;
+
+    - name: setup nipap dbs
+      become: yes
+      shell: |
+        psql -d nipap -f /usr/share/nipap/sql/ip_net.plsql
+        psql -d nipap -f /usr/share/nipap/sql/functions.plsql
+        psql -d nipap -f /usr/share/nipap/sql/triggers.plsql
+        
+    - name: install git
+      package: 
+        name: git
+        state: present
+    
+    - name: clone nipap repo 
+      git:
+        repo: https://github.com/SpriteLink/NIPAP.git
+        dest: /srv/NIPAP 
+
+    - name: install nipap
+      shell: |
+        cd /srv/NIPAP/nipap
+        python setup.py install
+        cd ../nipap-cli
+        python setup.py install
+    
