@@ -22,9 +22,23 @@
       register: pgsql_setup_status
       ignore_errors: yes
 
+    - name: start postgres
+      service:
+        name: postgresql
+        state: started  
+
+    - name: test become
+      shell: |
+        whoami
+      register: becometest
+      become: yes
+      become_user: postgres  
+
+    - name: create dbuser and db
+      debug: becometest
+
     - name: create dbuser and db
       shell: |
-        service postgresql start
         createuser -S -R -D -W nipap
         createdb -O nipap nipap
       become: yes
