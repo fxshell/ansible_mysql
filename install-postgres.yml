@@ -22,19 +22,24 @@
       register: pgsql_setup_status
       ignore_errors: yes
 
-    - name: configure postgres user
-      postgresql_user: 
-        name: nipap
-        password: thispasswortisnotsecure
-      become: true 
+    - name: create dbuser and db
+      shell: |
+        createuser -S -R -D -W nipap
+        createdb -O nipap nipap
+      become: yes
       become_user: postgres
+      
+      #postgresql_user: 
+        #name: nipap
+        #password: thispasswortisnotsecure
+        #become: true 
+        #become_user: postgres
 
-    - name: configure postgres db
-      postgresql_db: 
-        name: nipap
-        owner: nipap
-      become: true 
-      become_user: postgres
+
+  #  - name: configure postgres db
+  #    postgresql_db: 
+  #      name: nipap
+  #      owner: nipap
 
     - name: install postgres extension
       become: yes
