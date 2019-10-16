@@ -24,6 +24,7 @@
 
     - name: create dbuser and db
       shell: |
+        service postgresql start
         createuser -S -R -D -W nipap
         createdb -O nipap nipap
       become: yes
