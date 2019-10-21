@@ -25,6 +25,7 @@
     - name: start postgres
       shell: sudo systemctl start postgresql
       become: yes
+      become_user: root
       
         
     - name: test become
