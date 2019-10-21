@@ -22,12 +22,12 @@
       register: pgsql_setup_status
       ignore_errors: yes
 
-    - name: Start PostgreSQL and enable at boot
-      service: 
-        name: postgresql
-        enabled: yes
-        state: started
-        
+    - name: start postgres
+      shell: sudo systemctl start postgresql
+      become_user: root
+      become: yes
+      ignore_erros: yes 
+
     - name: test become
       shell: |
         whoami
@@ -35,7 +35,7 @@
       become: yes
       become_user: postgres  
 
-    - name: create dbuser and db
+    - name: debug become
       debug: 
         var: becometest
 
