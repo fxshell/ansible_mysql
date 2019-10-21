@@ -23,8 +23,9 @@
       ignore_errors: yes
 
     - name: start postgres
-      shell: sudo service postgresql status
+      shell: sudo systemctl start postgresql
       become: yes
+      
         
     - name: test become
       shell: |
