@@ -23,10 +23,9 @@
       ignore_errors: yes
 
     - name: start postgres
-      service:
-        name: postgresql
-        state: started  
-
+      shell: service postgresql status
+      become: yes
+        
     - name: test become
       shell: |
         whoami
